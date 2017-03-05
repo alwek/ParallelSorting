@@ -1,3 +1,4 @@
+import Arraysort.ArraysortTest;
 import Mergesort.MergesortTest;
 import Quicksort.QuicksortTest;
 
@@ -17,6 +18,13 @@ public class Main{
 
             MergesortTest mTest = new MergesortTest();
             mTest.testMergesortParallelism();
+
+            System.out.println();
+            System.out.println("Next test");
+            System.out.println();
+
+            ArraysortTest aTest = new ArraysortTest();
+            aTest.testArraysortParallelism();
         }//try
         catch (Exception e) {
             e.printStackTrace();

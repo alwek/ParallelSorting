@@ -67,16 +67,6 @@ public class QuicksortTest{
             System.out.println("Should not happen");
     }//testQuickSort
 
-    public void testStandardSort() {
-        long startTime = System.currentTimeMillis();
-        Arrays.sort(numbers2);
-        long stopTime = System.currentTimeMillis();
-        long elapsedTime = stopTime - startTime;
-        System.out.println("Standard Java sort " + elapsedTime);
-        if (!validate(numbers2))
-            System.out.println("Should not happen");
-    }//testStandardSort
-
     private boolean validate(float[] numbers) {
         for (int i = 0; i < numbers.length - 1; i++)
             if (numbers[i] > numbers[i + 1])
