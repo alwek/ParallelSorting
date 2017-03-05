@@ -1,9 +1,8 @@
 package Mergesort;
 
-import com.sun.scenario.effect.Merge;
-
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * Created by alica on 2017-03-02.
@@ -11,10 +10,10 @@ import java.util.Random;
  */
 public class MergesortTest {
     private float[] numbers, numbers2;
-    private final static int SIZE = 100000000;
+    private final static int SIZE = 1000000;//00;
     private final static int MAX = 100;
 
-    public void setUp() throws Exception {
+    public MergesortTest(){
         numbers = new float[SIZE];
         numbers2 = new float[SIZE];
 
@@ -91,4 +90,18 @@ public class MergesortTest {
 
         return true;
     }//validate
+
+    public void testMergesortParallelism(){
+        ForkJoinPool fjPool = new ForkJoinPool();
+
+        MergesortTask mergesortTask = new MergesortTask(numbers, 0, numbers.length - 1);
+        System.out.println(Thread.currentThread().getName() + ": Starting FJP");
+
+        long start = System.currentTimeMillis();
+        fjPool.invoke(mergesortTask);
+
+        System.out.println(Thread.currentThread().getName() + ": Time (ms): " + (System.currentTimeMillis() - start));
+        System.out.println("Validated: " + validate(numbers));
+        System.out.println("First: " + numbers[0] + " Middle: " + numbers[numbers.length/2] +" Last: " + numbers[numbers.length-1]);
+    }
 }//class

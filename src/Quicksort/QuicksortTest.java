@@ -2,24 +2,25 @@ package Quicksort;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * Created by alica on 2017-03-02.
  * Good luck, Commander!
  */
-public class QuicksortTest {
+public class QuicksortTest{
     private float[] numbers, numbers2;
-    private final static int SIZE = 100000000;
+    private final static int SIZE = 1000000;//00;
     private final static int MAX = 100;
 
-    public void setUp() throws Exception {
+    public QuicksortTest(){
         numbers = new float[SIZE];
         numbers2 = new float[SIZE];
 
         Random generator = new Random();
         for (int i = 0; i < numbers.length; i++)
             numbers[i] = generator.nextInt(MAX);
-    }//setUp
+    }//quicksort
 
     public void testNull() {
         Quicksort sorter = new Quicksort();
@@ -83,4 +84,19 @@ public class QuicksortTest {
 
         return true;
     }//validate
+
+    public void testQuickSortParallelism(){
+        ForkJoinPool fjPool = new ForkJoinPool();
+
+        QuicksortTask quicksortTask = new QuicksortTask(numbers, 0, numbers.length - 1);
+        //QuicksortTask quicksortTask = new QuicksortTask(numbers);
+        System.out.println(Thread.currentThread().getName() + ": Starting FJP");
+
+        long start = System.currentTimeMillis();
+        fjPool.invoke(quicksortTask);
+
+        System.out.println(Thread.currentThread().getName() + ": Time (ms): " + (System.currentTimeMillis() - start));
+        System.out.println("Validated: " + validate(numbers));
+        System.out.println("First: " + numbers[0] + " Middle: " + numbers[numbers.length/2] + " Last: " + numbers[numbers.length-1]);
+    }
 }//class

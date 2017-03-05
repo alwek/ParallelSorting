@@ -1,7 +1,5 @@
-import Mergesort.MergesortTask;
-import Quicksort.QuicksortTask;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ForkJoinTask;
+import Mergesort.MergesortTest;
+import Quicksort.QuicksortTest;
 
 /**
  * Created by alica on 2017-03-02.
@@ -10,19 +8,15 @@ import java.util.concurrent.ForkJoinTask;
 public class Main{
     public static void main(String[] args){
         try{
-            ForkJoinPool fjp = new ForkJoinPool();
-
-            MergesortTask task1 = new MergesortTask();
-            ForkJoinTask<String> fjt = ForkJoinTask.adapt(task1);
-            fjp.invoke(fjt);
-            System.out.println("Test is done: " + fjt.isDone());
+            QuicksortTest qTest = new QuicksortTest();
+            qTest.testQuickSortParallelism();
 
             System.out.println();
+            System.out.println("Next test");
+            System.out.println();
 
-            QuicksortTask task2 = new QuicksortTask();
-            fjt = ForkJoinTask.adapt(task2);
-            fjp.invoke(fjt);
-            System.out.println("Test is done: " + fjt.isDone());
+            MergesortTest mTest = new MergesortTest();
+            mTest.testMergesortParallelism();
         }//try
         catch (Exception e) {
             e.printStackTrace();
