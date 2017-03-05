@@ -9,10 +9,17 @@ import Quicksort.QuicksortTest;
 public class Main{
     public static void main(String[] args){
         try{
+            System.out.println("Calling garbage collection and waiting 2 seconds");
+            System.gc();
+            System.out.println("Starting tests");
+            System.out.println();
+
             QuicksortTest qTest = new QuicksortTest();
             qTest.testQuickSortParallelism();
 
             System.out.println();
+            System.out.println("Calling garbage collection and waiting 2 seconds");
+            System.gc();
             System.out.println("Next test");
             System.out.println();
 
@@ -20,6 +27,8 @@ public class Main{
             mTest.testMergesortParallelism();
 
             System.out.println();
+            System.out.println("Calling garbage collection and waiting 2 seconds");
+            System.gc();
             System.out.println("Next test");
             System.out.println();
 

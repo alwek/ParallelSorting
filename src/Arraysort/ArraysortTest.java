@@ -10,7 +10,7 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class ArraysortTest {
     private float[] numbers, numbers2;
-    private final static int SIZE = 1000000;//00;
+    private final static int SIZE = 10000000;
     private final static int MAX = 100;
 
     public ArraysortTest(){

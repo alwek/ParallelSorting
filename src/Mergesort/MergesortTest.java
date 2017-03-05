@@ -1,6 +1,5 @@
 package Mergesort;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 
@@ -10,7 +9,7 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class MergesortTest {
     private float[] numbers, numbers2;
-    private final static int SIZE = 1000000;//00;
+    private final static int SIZE = 10000000;
     private final static int MAX = 100;
 
     public MergesortTest(){

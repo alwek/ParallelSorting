@@ -10,7 +10,7 @@ public class MergesortTask extends RecursiveAction {
     private final float[] array;
     private final int low;
     private final int high;
-    private static final int THRESHOLD = 1000000;
+    private static final int THRESHOLD = 10000000;
 
     /**
      * Creates a {@code MergeSortTask} containing the array and the bounds of the array
@@ -49,7 +49,7 @@ public class MergesortTask extends RecursiveAction {
         if (array[middle - 1] < array[middle]) {
             return; // the arrays are already correctly sorted, so we can skip the merge
         }
-        int[] copy = new int[high - low];
+        float[] copy = new float[high - low];
         System.arraycopy(array, low, copy, 0, copy.length);
         int copyLow = 0;
         int copyHigh = high - low;

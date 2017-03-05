@@ -10,7 +10,7 @@ public class QuicksortTask extends RecursiveAction{
     private float[] a;
     private int left;
     private int right;
-    private static final int THRESHOLD = 1000000;
+    private static final int THRESHOLD = 10000000;
 
     QuicksortTask(float[] a, int left, int right) {
         this.a = a;
