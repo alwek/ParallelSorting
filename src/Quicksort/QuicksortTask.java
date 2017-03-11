@@ -21,14 +21,11 @@ public class QuicksortTask extends RecursiveAction{
 
     @Override
     protected void compute() {
+        //System.out.println("size: " + a.length + " left: " + left + " right: " + right + " threshold: " + (left + (right - left))/2);
         if(right - left < THRESHOLD){
-            //System.out.println(Thread.currentThread().getName() + ": Threshold met, sorting");
-            //Quicksort qSort = new Quicksort();
-            //qSort.sort(a);//(a, left, right + 1);
             Arrays.sort(a, left, right + 1);
         }//if
         else{
-            //System.out.println(Thread.currentThread().getName() + ": Threshold not met, forking");
             int pivotIndex = partition(a, left, right);
 
             QuicksortTask t1 = new QuicksortTask(a, left, pivotIndex - 1);
@@ -40,25 +37,53 @@ public class QuicksortTask extends RecursiveAction{
         }//else
     }//compute
 
-    private int partition(float[] a, int p, int r) {
+    private int partition(float[] table, int first, int last){
+        System.out.println(table.length + " " + first + " " + last);
+        Float pivot = table[first];
+        int up = first;
+        int down = last;
+
+        do{
+            while(up < last && pivot.compareTo(table[up])>= 0){ //Float.compare(pivot, table[up]) >= 0
+                up++;
+            }
+
+            while(pivot.compareTo(table[down]) < 0){ //Float.compare(pivot, table[down]) < 0
+                down--;
+            }
+
+            if(up < down)
+                swap(up, down);
+
+        }while(up < down);
+
+        swap(first, down);
+        return down;
+    }//partition
+
+    int partition2(float[] a, int p, int r) {
         int i = p - 1;
         float x = a[r];
-
-        for(int j = p; j < r; j++){
-            if(a[j] < x){
+        for (int j = p; j < r; j++) {
+            if (a[j] < x) {
                 i++;
                 swap(a, i, j);
-            }//if
-        }//for
-
+            }
+        }
         i++;
         swap(a, i, r);
         return i;
-    }//partition
+    }
 
-    private void swap(float[] a, int p, int r) {
+    void swap(float[] a, int p, int r) {
         float t = a[p];
         a[p] = a[r];
         a[r] = t;
+    }
+
+    private void swap(int first, int last) {
+        float t = a[first];
+        a[first] = a[last];
+        a[last] = t;
     }//swap
 }//class

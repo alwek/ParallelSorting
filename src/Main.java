@@ -26,6 +26,7 @@ public class Main{
             QuicksortTest qTest = new QuicksortTest();
             qTest.testQuickSortParallelism();
 
+            /*
             System.out.println();
             System.out.println("Calling garbage collection and waiting 2 seconds");
             System.gc();
@@ -43,6 +44,7 @@ public class Main{
 
             ArraysortTest aTest = new ArraysortTest();
             aTest.testArraysortParallelism();
+            */
         }//try
         catch (Exception e) {
             e.printStackTrace();
