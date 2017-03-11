@@ -4,17 +4,20 @@ package Quicksort;
  * Created by alica on 2017-03-02.
  * Good luck, Commander!
  */
-public class Quicksort{
+
+public class Quicksort  {
     private float[] numbers;
+    private int number;
 
-    public void sort(float[] values){
+    public void sort(float[] values) {
         // check for empty or null array
-        if (values == null || values.length == 0)
+        if (values == null || values.length == 0){
             return;
-
+        }
         this.numbers = values;
-        quicksort(0, values.length - 1);
-    }//sort
+        number = values.length;
+        quicksort(0, number - 1);
+    }
 
     private void quicksort(int low, int high) {
         int i = low, j = high;
@@ -43,19 +46,18 @@ public class Quicksort{
                 exchange(i, j);
                 i++;
                 j--;
-            }//if
-        }//while
-
+            }
+        }
         // Recursion
         if (low < j)
             quicksort(low, j);
         if (i < high)
             quicksort(i, high);
-    }//quicksort
+    }
 
     private void exchange(int i, int j) {
         float temp = numbers[i];
         numbers[i] = numbers[j];
         numbers[j] = temp;
-    }//exchange
-}//class
+    }
+}

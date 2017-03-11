@@ -1,5 +1,6 @@
 package Quicksort;
 
+import java.util.Arrays;
 import java.util.concurrent.RecursiveAction;
 
 /**
@@ -10,7 +11,7 @@ public class QuicksortTask extends RecursiveAction{
     private float[] a;
     private int left;
     private int right;
-    private static final int THRESHOLD = 10000000;
+    private static final int THRESHOLD = 10000;
 
     QuicksortTask(float[] a, int left, int right) {
         this.a = a;
@@ -21,12 +22,13 @@ public class QuicksortTask extends RecursiveAction{
     @Override
     protected void compute() {
         if(right - left < THRESHOLD){
-            System.out.println(Thread.currentThread().getName() + ": Threshold met, sorting");
-            Quicksort qSort = new Quicksort();
-            qSort.sort(a);//(a, left, right + 1);
+            //System.out.println(Thread.currentThread().getName() + ": Threshold met, sorting");
+            //Quicksort qSort = new Quicksort();
+            //qSort.sort(a);//(a, left, right + 1);
+            Arrays.sort(a, left, right + 1);
         }//if
         else{
-            System.out.println(Thread.currentThread().getName() + ": Threshold not met, forking");
+            //System.out.println(Thread.currentThread().getName() + ": Threshold not met, forking");
             int pivotIndex = partition(a, left, right);
 
             QuicksortTask t1 = new QuicksortTask(a, left, pivotIndex - 1);

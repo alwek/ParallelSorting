@@ -8,50 +8,18 @@ import java.util.concurrent.ForkJoinPool;
  * Good luck, Commander!
  */
 public class MergesortTest {
-    private float[] numbers, numbers2;
-    private final static int SIZE = 10000000;
+    private float[] numbers;
+    private final static int SIZE = 100000000;
     private final static int MAX = 100;
 
     public MergesortTest(){
         numbers = new float[SIZE];
-        numbers2 = new float[SIZE];
 
         Random generator = new Random();
         for (int i = 0; i < numbers.length; i++)
             numbers[i] = generator.nextInt(MAX);
 
-        numbers2 = numbers;
     }//setUp
-
-    public void testNull() {
-        Mergesort sorter = new Mergesort();
-        sorter.sort(null);
-        System.out.println("Null test done");
-    }//testNull
-
-    public void testEmpty() {
-        Mergesort sorter = new Mergesort();
-        sorter.sort(new float[0]);
-        System.out.println("Empty test done");
-    }//testEmpty
-
-    public void testSimpleElement() {
-        Mergesort sorter = new Mergesort();
-        float[] test = new float[1];
-        test[0] = 5;
-        sorter.sort(test);
-        System.out.println("Simple Element test done");
-    }//testSimpleElement
-
-    public void testSpecial() {
-        Mergesort sorter = new Mergesort();
-        float[] test = { 5, 5, 6, 6, 4, 4, 5, 5, 4, 4, 6, 6, 5, 5 };
-        sorter.sort(test);
-        if (!validate(test))
-            System.out.println("Should not happen");
-
-        System.out.println("Special test done");
-    }//testSpecial
 
     public void testMergeSort() {
         long startTime = System.currentTimeMillis();

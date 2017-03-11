@@ -1,5 +1,6 @@
 package Mergesort;
 
+import java.util.Arrays;
 import java.util.concurrent.RecursiveAction;
 
 /**
@@ -10,7 +11,7 @@ public class MergesortTask extends RecursiveAction {
     private final float[] array;
     private final int low;
     private final int high;
-    private static final int THRESHOLD = 10000000;
+    private static final int THRESHOLD = 10000;
 
     /**
      * Creates a {@code MergeSortTask} containing the array and the bounds of the array
@@ -28,11 +29,12 @@ public class MergesortTask extends RecursiveAction {
     @Override
     protected void compute() {
         if (high - low <= THRESHOLD) {
-            System.out.println(Thread.currentThread().getName() + ": Threshold met, sorting");
-            Mergesort mSort = new Mergesort();
-            mSort.sort(array);
+            //System.out.println(Thread.currentThread().getName() + ": Threshold met, sorting");
+            //Mergesort mSort = new Mergesort();
+            //mSort.sort(array);
+            Arrays.sort(array);
         } else {
-            System.out.println(Thread.currentThread().getName() + ": Threshold not met, forking");
+            //System.out.println(Thread.currentThread().getName() + ": Threshold not met, forking");
             int middle = low + ((high - low) >> 1);
             // Execute the sub tasks and wait for them to finish
             invokeAll(new MergesortTask(array, low, middle), new MergesortTask(array, middle, high));
