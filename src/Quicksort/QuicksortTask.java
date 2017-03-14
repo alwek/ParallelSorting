@@ -21,7 +21,6 @@ public class QuicksortTask extends RecursiveAction{
 
     @Override
     protected void compute() {
-        //System.out.println("size: " + a.length + " left: " + left + " right: " + right + " threshold: " + (left + (right - left))/2);
         if(right - left < THRESHOLD){
             Arrays.sort(a, left, right + 1);
         }//if
@@ -38,17 +37,17 @@ public class QuicksortTask extends RecursiveAction{
     }//compute
 
     private int partition(float[] table, int first, int last){
-        System.out.println(table.length + " " + first + " " + last);
-        Float pivot = table[first];
+        //System.out.println(table.length + " " + first + " " + last);
+        float pivot = table[first];
         int up = first;
         int down = last;
 
         do{
-            while(up < last && pivot.compareTo(table[up])>= 0){ //Float.compare(pivot, table[up]) >= 0
+            while(up < last && pivot >= table[up]){// pivot.compareTo(table[up])>= 0){ //Float.compare(pivot, table[up]) >= 0
                 up++;
             }
 
-            while(pivot.compareTo(table[down]) < 0){ //Float.compare(pivot, table[down]) < 0
+            while(pivot < table[down]){// pivot.compareTo(table[down]) < 0){ //Float.compare(pivot, table[down]) < 0
                 down--;
             }
 
