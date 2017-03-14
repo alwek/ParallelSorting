@@ -18,7 +18,7 @@ public class QuicksortTest{
         Random generator = new Random();
 
         for (int i = 0; i < numbers.length; i++)
-            numbers[i] = generator.nextInt(MAX);
+            numbers[i] = generator.nextInt(MAX);//generator.nextFloat() * 100;
 
         control = numbers;
     }//quicksort

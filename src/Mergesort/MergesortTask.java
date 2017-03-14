@@ -1,13 +1,13 @@
 package Mergesort;
 
 import java.util.Arrays;
-import java.util.concurrent.RecursiveAction;
+import java.util.concurrent.RecursiveTask;
 
 /**
  * Created by alica on 2017-03-02.
  * Good luck, Commander!
  */
-public class MergesortTask extends RecursiveAction {
+public class MergesortTask extends RecursiveTask<float[]> {
     private final float[] array;
     private final int low;
     private final int high;
@@ -27,42 +27,37 @@ public class MergesortTask extends RecursiveAction {
     }
 
     @Override
-    protected void compute() {
-        if (high - low <= THRESHOLD) {
-            //System.out.println(Thread.currentThread().getName() + ": Threshold met, sorting");
-            //Mergesort mSort = new Mergesort();
-            //mSort.sort(array);
+    protected float[] compute() {
+        if(high - low <= THRESHOLD)
             Arrays.sort(array);
-        } else {
-            //System.out.println(Thread.currentThread().getName() + ": Threshold not met, forking");
+        else{
             int middle = low + ((high - low) >> 1);
+
             // Execute the sub tasks and wait for them to finish
             invokeAll(new MergesortTask(array, low, middle), new MergesortTask(array, middle, high));
+
             // Then merge the results
             merge(middle);
-        }
-    }
+        }//else
+        return array;
+    }//compute
 
     /**
      * Merges the two sorted arrays this.low, middle - 1 and middle, this.high - 1
      * @param middle the index in the array where the second sorted list begins
      */
     private void merge(int middle) {
-        if (array[middle - 1] < array[middle]) {
+        if (array[middle - 1] < array[middle])
             return; // the arrays are already correctly sorted, so we can skip the merge
-        }
+
         float[] copy = new float[high - low];
         System.arraycopy(array, low, copy, 0, copy.length);
-        int copyLow = 0;
-        int copyHigh = high - low;
-        int copyMiddle = middle - low;
 
-        for (int i = low, p = copyLow, q = copyMiddle; i < high; i++) {
-            if (q >= copyHigh || (p < copyMiddle && copy[p] < copy[q]) ) {
+        for(int i = low, p = 0, q = high - low; i < high; i++){
+            if(q >= high - low || (p < high - low && copy[p] < copy[q]))
                 array[i] = copy[p++];
-            } else {
+            else
                 array[i] = copy[q++];
-            }
-        }
-    }
-}
+        }//for
+    }//merge
+}//class
