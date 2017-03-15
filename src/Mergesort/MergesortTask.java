@@ -20,12 +20,16 @@ public class MergesortTask extends RecursiveTask<float[]> {
      * @param low the lower element to start sorting at
      * @param high the non-inclusive high element to sort to
      */
-    public MergesortTask(float[] array, int low, int high) {
+    MergesortTask(float[] array, int low, int high) {
         this.array = array;
         this.low = low;
         this.high = high;
     }
 
+    /**
+     * Determines whether threshold is met or not, and takes a decision based on that
+     * @return array
+     */
     @Override
     protected float[] compute() {
         if(high - low <= THRESHOLD)
@@ -34,8 +38,6 @@ public class MergesortTask extends RecursiveTask<float[]> {
             int middle = low + ((high - low) >> 1);
 
             // Execute the sub tasks and wait for them to finish
-            //invokeAll(new MergesortTask(array, low, middle), new MergesortTask(array, middle, high));
-
             MergesortTask t1 = new MergesortTask(array, low, middle);
             MergesortTask t2 = new MergesortTask(array, middle, high);
 
@@ -50,7 +52,7 @@ public class MergesortTask extends RecursiveTask<float[]> {
     }//compute
 
     /**
-     * Merges the two sorted arrays this.low, middle - 1 and middle, this.high - 1
+     * Merges the two sorted arrays this.low, middle and middle, this.high
      * @param middle the index in the array where the second sorted list begins
      */
     private void merge(int middle) {

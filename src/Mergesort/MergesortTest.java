@@ -9,22 +9,19 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class MergesortTest {
     private float[] numbers;
-    private final static int SIZE = 10000000;
-    private final static int MAX = 100;
+    private final static int SIZE = 100000000;
 
     public MergesortTest(){
         numbers = new float[SIZE];
 
         Random generator = new Random();
         for (int i = 0; i < numbers.length; i++)
-            numbers[i] = generator.nextFloat();// * 100; //generator.nextInt(MAX);
+            numbers[i] = generator.nextFloat();
     }//setUp
 
     private boolean validate(float[] numbers) {
         for (int i = 0; i < numbers.length - 1; i++) {
-            //System.out.println(numbers[i]);
             if (numbers[i] > numbers[i + 1]){
-                //System.out.println(numbers[i+1]);
                 return false;
             }
         }
@@ -52,17 +49,5 @@ public class MergesortTest {
             fjPool.invoke(mergesortTask);
             System.out.println("Time: " + (System.currentTimeMillis() - start) + " ms");
         }//for
-        /*
-        MergesortTask mergesortTask = new MergesortTask(numbers, 0, numbers.length - 1);
-        System.out.println(Thread.currentThread().getName() + ": Starting FJP");
-
-        long start = System.currentTimeMillis();
-        fjPool.invoke(mergesortTask);
-        long stop = System.currentTimeMillis();
-
-        System.out.println("Time (ms): " + (stop - start));
-        System.out.println("Validated: " + validate(numbers));
-        System.out.println("First: " + numbers[0] + " Middle: " + numbers[numbers.length/2] +" Last: " + numbers[numbers.length-1]);
-        */
-    }
+    }//testParallell
 }//class

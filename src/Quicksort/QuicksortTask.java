@@ -43,7 +43,7 @@ public class QuicksortTask extends RecursiveTask<float[]>{
         int i = p-1;
         int j = r+1;
 
-        while (true) {
+        while(true){
             while (++i < r && a[i] < x);
             while (--j > p && a[j] > x);
 
@@ -51,42 +51,9 @@ public class QuicksortTask extends RecursiveTask<float[]>{
                 float tmp = a[i];
                 a[i] = a[j];
                 a[j] = tmp;
-            } else {
+            }//if
+            else
                 return j;
-            }
-        }
-    }
-
-    private int partition(int first, int last){
-        float pivot = array[first];
-        int up = first;
-        int down = last;
-
-        while(up < down){
-            while(up < last && pivot >= array[up])
-                up++;
-
-            while(pivot < array[down])
-                down--;
-
-            if(up < down){
-                float t = array[up];
-                array[up] = array[down];
-                array[down] = t;
-            }
-                //swap(up, down);
         }//while
-
-        float t = array[up];
-        array[up] = array[down];
-        array[down] = t;
-        //swap(first, down);
-        return down;
     }//partition
-
-    private void swap(int first, int last) {
-        float t = array[first];
-        array[first] = array[last];
-        array[last] = t;
-    }//swap
 }//class

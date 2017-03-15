@@ -40,23 +40,17 @@ public class QuicksortTest{
     private boolean validate(float[] numbers) {
         for (int i = 0; i < numbers.length - 1; i++){
             if (numbers[i] > numbers[i + 1]){
-                System.out.println(numbers[i-1]);
-                System.out.println(numbers[i]);
-                System.out.println(numbers[i+1]);
-                System.out.println(numbers[i+2]);
                 return false;
-            }
-        }
+            }//if
+        }//for
 
         return true;
     }//validate
 
-    public void testQuickSortParallelism(){
+    public void testQuickSortParallelism() throws InterruptedException {
         ForkJoinPool fjPool = new ForkJoinPool(4);
-
         QuicksortTask quicksortTask = new QuicksortTask(numbers, 0, numbers.length - 1);
-        //QuicksortTask quicksortTask = new QuicksortTask(numbers);
-        System.out.println(Thread.currentThread().getName() + ": Starting FJP");
+        System.out.println(Thread.currentThread().getName() + ": Starting FJP QuickSort");
 
         long start = System.currentTimeMillis();
         fjPool.invoke(quicksortTask);
@@ -64,6 +58,7 @@ public class QuicksortTest{
         System.out.println(Thread.currentThread().getName() + ": Time (ms): " + (System.currentTimeMillis() - start));
         System.out.println("Validated: " + validate(numbers));
         System.out.println("First: " + numbers[0] + " Middle: " + numbers[numbers.length/2] + " Last: " + numbers[numbers.length-1]);
+
         Arrays.sort(control);
         if(control.equals(numbers))
             System.out.println("IT IS DEFINITYL SORTED");
