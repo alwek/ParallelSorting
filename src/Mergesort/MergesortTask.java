@@ -8,9 +8,9 @@ import java.util.concurrent.RecursiveTask;
  * Good luck, Commander!
  */
 public class MergesortTask extends RecursiveTask<float[]> {
-    private final float[] array;
-    private final int low;
-    private final int high;
+    private float[] array;
+    private int low;
+    private int high;
     private static final int THRESHOLD = 10000;
 
     /**
@@ -34,7 +34,14 @@ public class MergesortTask extends RecursiveTask<float[]> {
             int middle = low + ((high - low) >> 1);
 
             // Execute the sub tasks and wait for them to finish
-            invokeAll(new MergesortTask(array, low, middle), new MergesortTask(array, middle, high));
+            //invokeAll(new MergesortTask(array, low, middle), new MergesortTask(array, middle, high));
+
+            MergesortTask t1 = new MergesortTask(array, low, middle);
+            MergesortTask t2 = new MergesortTask(array, middle, high);
+
+            t1.fork();
+            t2.compute();
+            t1.join();
 
             // Then merge the results
             merge(middle);

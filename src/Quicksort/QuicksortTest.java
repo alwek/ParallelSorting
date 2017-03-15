@@ -10,7 +10,7 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class QuicksortTest{
     private float[] numbers, control;
-    private final static int SIZE = 1000000;
+    private final static int SIZE = 100000000;
     private final static int MAX = 100;
 
     public QuicksortTest(){
@@ -38,15 +38,21 @@ public class QuicksortTest{
     }//testQuickSort
 
     private boolean validate(float[] numbers) {
-        for (int i = 0; i < numbers.length - 1; i++)
-            if (numbers[i] > numbers[i + 1])
+        for (int i = 0; i < numbers.length - 1; i++){
+            if (numbers[i] > numbers[i + 1]){
+                System.out.println(numbers[i-1]);
+                System.out.println(numbers[i]);
+                System.out.println(numbers[i+1]);
+                System.out.println(numbers[i+2]);
                 return false;
+            }
+        }
 
         return true;
     }//validate
 
     public void testQuickSortParallelism(){
-        ForkJoinPool fjPool = new ForkJoinPool();
+        ForkJoinPool fjPool = new ForkJoinPool(4);
 
         QuicksortTask quicksortTask = new QuicksortTask(numbers, 0, numbers.length - 1);
         //QuicksortTask quicksortTask = new QuicksortTask(numbers);

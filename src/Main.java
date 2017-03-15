@@ -9,11 +9,11 @@ import Quicksort.QuicksortTest;
 public class Main{
     public static void main(String[] args){
         try{
-            //QuicksortTest qTest = new QuicksortTest();
-            //qTest.testQuickSortParallelism();
+            QuicksortTest qTest = new QuicksortTest();
+            qTest.testQuickSortParallelism();
 
-            MergesortTest mTest = new MergesortTest();
-            mTest.testMergesortParallelism();
+            //MergesortTest mTest = new MergesortTest();
+            //mTest.testMergesortParallelism();
 
             /*
             ArraysortTest aTest = new ArraysortTest();

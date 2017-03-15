@@ -1,7 +1,6 @@
 package Quicksort;
 
 import java.util.Arrays;
-import java.util.concurrent.RecursiveAction;
 import java.util.concurrent.RecursiveTask;
 
 /**
@@ -26,10 +25,10 @@ public class QuicksortTask extends RecursiveTask<float[]>{
             Arrays.sort(array, left, right + 1);
         }//if
         else{
-            int pivotIndex = partition(left, right);
+            int pivotIndex = partition(array, left, right);
             //int middle = low + ((high - low) >> 1);
 
-            QuicksortTask t1 = new QuicksortTask(array, left, pivotIndex - 1);
+            QuicksortTask t1 = new QuicksortTask(array, left, pivotIndex);
             QuicksortTask t2 = new QuicksortTask(array, pivotIndex + 1, right);
 
             t1.fork();
@@ -38,6 +37,25 @@ public class QuicksortTask extends RecursiveTask<float[]>{
         }//else
         return array;
     }//compute
+
+    private int partition(float[] a, int p, int r) {
+        float x = a[p];
+        int i = p-1;
+        int j = r+1;
+
+        while (true) {
+            while (++i < r && a[i] < x);
+            while (--j > p && a[j] > x);
+
+            if (i < j) {
+                float tmp = a[i];
+                a[i] = a[j];
+                a[j] = tmp;
+            } else {
+                return j;
+            }
+        }
+    }
 
     private int partition(int first, int last){
         float pivot = array[first];
@@ -51,11 +69,18 @@ public class QuicksortTask extends RecursiveTask<float[]>{
             while(pivot < array[down])
                 down--;
 
-            if(up < down)
-                swap(up, down);
+            if(up < down){
+                float t = array[up];
+                array[up] = array[down];
+                array[down] = t;
+            }
+                //swap(up, down);
         }//while
 
-        swap(first, down);
+        float t = array[up];
+        array[up] = array[down];
+        array[down] = t;
+        //swap(first, down);
         return down;
     }//partition
 
