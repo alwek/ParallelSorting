@@ -57,7 +57,7 @@ public class QuicksortTest{
 
         System.out.println(Thread.currentThread().getName() + ": Time (ms): " + (System.currentTimeMillis() - start));
         System.out.println("Validated: " + validate(numbers));
-        System.out.println("First: " + numbers[0] + " Middle: " + numbers[numbers.length/2] + " Last: " + numbers[numbers.length-1]);
+        //System.out.println("First: " + numbers[0] + " Middle: " + numbers[numbers.length/2] + " Last: " + numbers[numbers.length-1]);
 
         Arrays.sort(control);
         if(control.equals(numbers))

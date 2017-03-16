@@ -37,7 +37,7 @@ public class ArraysortTask extends RecursiveAction{
             // Execute the sub tasks and wait for them to finish
             invokeAll(new ArraysortTask(array, low, middle), new ArraysortTask(array, middle, high));
             // Then merge the results
-            merge(middle);
+            //merge(middle);
         }
     }
 

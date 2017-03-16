@@ -27,13 +27,11 @@ public class Main{
             QuicksortTest qTest = new QuicksortTest();
             qTest.testQuickSortParallelism();
 
-            MergesortTest mTest = new MergesortTest();
-            mTest.testMergesortParallelism();
+            //MergesortTest mTest = new MergesortTest();
+            //mTest.testMergesortParallelism();
 
-            /*
-            ArraysortTest aTest = new ArraysortTest();
-            aTest.testArraysortParallelism();
-            */
+            //ArraysortTest aTest = new ArraysortTest();
+            //aTest.testArraysortParallelism();
         }//try
         catch (Exception e) {
             e.printStackTrace();
@@ -41,3 +39,13 @@ public class Main{
     }//main
 
 }//class
+/*
+referera till Amdahl's law i abstract, analys och slutsats.
+Ta upp formel för den i bakgrunden.
+byt bakgrund till theory, nämn principiellt hur varje sort fungerar
+antal cores i tabellen
+visa medelvärdet för varje test på kärna 1, 2 ...
+bättre figurtext
+ta inte med warmup i graferna och tabellerna
+
+ */

@@ -9,7 +9,7 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class MergesortTest {
     private float[] numbers;
-    private final static int SIZE = 100000000;
+    private final static int SIZE = 10000000;
 
     public MergesortTest(){
         numbers = new float[SIZE];
